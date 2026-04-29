@@ -23,9 +23,9 @@ defineProps({
     type: Object,
     required: true,
   },
-});
+})
 
-defineEmits(["toggle", "remove", "edit"]);
+defineEmits(['toggle', 'remove', 'edit'])
 </script>
 
 <style scoped>
@@ -39,6 +39,16 @@ defineEmits(["toggle", "remove", "edit"]);
   margin-bottom: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: opacity 0.2s;
+  gap: 10px;
+}
+
+.task-thumbnail {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  flex-shrink: 0;
 }
 
 .task-item.done {
@@ -53,7 +63,7 @@ defineEmits(["toggle", "remove", "edit"]);
   flex: 1;
 }
 
-.task-label input[type="checkbox"] {
+.task-label input[type='checkbox'] {
   width: 20px;
   height: 20px;
   accent-color: #4a90d9;
@@ -66,6 +76,19 @@ defineEmits(["toggle", "remove", "edit"]);
 .task-item.done .task-title {
   text-decoration: line-through;
   color: #999;
+}
+
+.task-remove {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 4px 8px;
+}
+
+.task-remove:hover {
+  text-decoration: underline;
 }
 
 .task-actions {
@@ -85,27 +108,5 @@ defineEmits(["toggle", "remove", "edit"]);
 
 .task-edit:hover {
   text-decoration: underline;
-}
-
-.task-remove {
-  background: none;
-  border: none;
-  color: #e74c3c;
-  cursor: pointer;
-  font-size: 0.85rem;
-  padding: 4px 8px;
-}
-
-.task-remove:hover {
-  text-decoration: underline;
-}
-
-.task-thumbnail {
-  width: 44px;
-  height: 44px;
-  object-fit: cover;
-  border-radius: 6px;
-  border: 1px solid #eee;
-  flex-shrink: 0;
 }
 </style>
