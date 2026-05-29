@@ -1,17 +1,27 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { VitePWA } from 'vite-plugin-pwa';
+import { fileURLToPath, URL } from 'node:url';
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
+
   plugins: [
     vue(),
+
     VitePWA({
       registerType: 'autoUpdate',
+
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
         cleanupOutdatedCaches: true,
         sourcemap: false,
       },
+
       manifest: {
         name: 'Gerenciador de Tarefas',
         short_name: 'Tarefas',
@@ -21,6 +31,7 @@ export default defineConfig({
         display: 'standalone',
         scope: '/',
         start_url: '/',
+
         icons: [
           {
             src: '/icons/icon-192x192.png',
