@@ -1,26 +1,18 @@
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import { VitePWA } from 'vite-plugin-pwa';
-import { fileURLToPath, URL } from 'node:url';
+import { fileURLToPath, URL } from 'node:url'
+
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import vueDevTools from 'vite-plugin-vue-devtools'
+import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-    },
-  },
-
   plugins: [
     vue(),
-
     VitePWA({
       registerType: 'autoUpdate',
-
-      workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
-        cleanupOutdatedCaches: true,
-        sourcemap: false,
-      },
+      strategies: 'injectManifest', //
+      srcDir: 'src',                //
+      filename: 'sw.js',            //
 
       manifest: {
         name: 'Gerenciador de Tarefas',
@@ -31,7 +23,7 @@ export default defineConfig({
         display: 'standalone',
         scope: '/',
         start_url: '/',
-
+        id: 'com.task-manager.app',
         icons: [
           {
             src: '/icons/icon-192x192.png',
@@ -51,6 +43,16 @@ export default defineConfig({
           },
         ],
       },
+      devOptions: {
+        enabled: true,
+        type: 'module', //
+      },
     }),
+    vueDevTools(),
   ],
-});
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
+})
